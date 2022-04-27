@@ -4,8 +4,8 @@ $(() => {
 
   class Dancer {
     constructor (top, left) {
-      this.top = top;
-      this.left = left;
+      this.$node = $('<div class="dancer"></div>');
+      this.setPosition(top, left);
     }
     setPosition (top, left) { 
       this.$node.css({top, left});
@@ -15,45 +15,43 @@ $(() => {
   class Tapper extends Dancer {
     constructor (top, left) {
       super(top, left);
+      this.$node.addClass('tap-dancer');
     }
   }
 
   class Rainbow extends Dancer {
     constructor (top, left) {
       super(top, left);
+      this.$node.addClass('tap-rainbow');
     }
   }
 
   function randomStagePosition () {
-    // Implement this function so that it returns an array with
-    // the height and width coordinates of a random point on stage,
-    // measured as the distance in pixels from its top-left corner.
-    // Then use it every time you want to place a new dancer on stage.
-    var x = 800;
-    var y = 1600;
-    var randomX = Math.floor(Math.random()*x);
-    var randomY = Math.floor(Math.random()*y);
-    return [randomX,randomY];
+    var x = $('#stage').height();
+    var y = $('#stage').width();
+    var randomX = Math.floor(Math.random() * x);
+    var randomY = Math.floor(Math.random() * y);
+    return [randomX - 20, randomY - 20];
   }
 
   $('#regular').on('click', () => {
     console.log('Hello');
     const [top, left] = randomStagePosition();
-    const newDancer = Dancer(top, left);
-    $('#stage').append(newDancer.$node);
+    const dancer = new Dancer(top, left);
+    $('#stage').append(dancer.$node);
   });
 
   $('#tapper').on('click', () => {
     console.log('Hello');
     const [top, left] = randomStagePosition();
-    const newTapper = Tapper(top, left);
-    $('#stage').append(newTapper.$node);
+    const tapper = new Tapper(top, left);
+    $('#stage').append(tapper.$node);
   });
 
   $('#rainbow').on('click', () => {
     console.log('Hello');
     const [top, left] = randomStagePosition();
-    const newRainbow = Rainbow(top, left);
+    const newRainbow = new Rainbow(top, left);
     $('#stage').append(newRainbow.$node);
   });
 });
