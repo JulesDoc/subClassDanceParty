@@ -54,9 +54,20 @@ header {
 }
 
 .dancer.tap-dancer {
-  background-color: transparent;
+  animation: tap 1s linear infinite;
 }
-.dancer.rainbow {
+@keyframes tap{
+  0%{
+    opacity: 1;
+  }
+  50%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+.dancer.tap-rainbow {
   animation: colorchange 3s linear infinite;
 }
 @keyframes colorchange {
@@ -68,3 +79,4 @@ header {
 .dancer { /* stylelint-disable-line no-duplicate-selectors */
   transition: top 0.4s linear, left 0.4s linear;
 }
+
